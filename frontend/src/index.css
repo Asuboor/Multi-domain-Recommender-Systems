@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200&family=Indie+Flower&family=Montserrat+Alternates:wght@800&family=Montserrat:wght@800&family=Pacifico&family=Poppins:wght@300&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100&family=Source+Code+Pro:wght@200&family=Urbanist:wght@500&display=swap');
+body {
+  margin: 0;
+  font-family: raleway;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #16161D;
+  opacity: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.scroller::-webkit-scrollbar {
+  width: 0.6em;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background-color:#D9D9D9;
+  margin: 20px 0px;
+  border-radius: 81px;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background-color: #3109BA;
+  /* outline: 1px solid rgba(28, 41, 81, 0.5); */
+  /* opacity; */
+  border-radius: 26px;
+}
