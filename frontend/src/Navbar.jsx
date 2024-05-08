@@ -49,7 +49,7 @@ function Navbar(props) {
   console.log(user)
 
   const handleLogout = () => {
-    navigate('/login');
+    // navigate('/login');
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     setToken(null);
     localStorage.removeItem('user');

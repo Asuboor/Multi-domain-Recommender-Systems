@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { FaCalendar } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { IoReturnDownBack, IoBookSharp } from "react-icons/io5";
-import Movie from "../Assets/test-image.jpg"
+import Movies from "../Assets/movies.jpg";
 function MovieComponent({ backClick, ...props }) {
 
 
@@ -43,11 +43,11 @@ function MovieComponent({ backClick, ...props }) {
 
             {/* Testing */}
 
-            <div className='bg-[#F8F8FF] border-4 border-[#3109BA] flex min-w-auto max-w-5/6 rounded-xl '  >
-                <div className='m-4 min-w-fit w-auto '>
-                    <img src={Movie} alt="" className='h-full rounded-lg' />
+            <div className='bg-[#F8F8FF] border-4 border-[#3109BA] flex  max-w-5/6 rounded-xl '  >
+                <div className='m-4  w-1/3 '>
+                    <img src={props.recommendations?.Image ? props.recommendations?.Image : Movies} alt="" className=' rounded-lg '   />
                 </div>
-                <div>
+                <div className='w-2/3'>
                 <div className=' text-[30px] p-2 font-semibold text-white bg-[#674CC4] m-2 rounded-xl'>
                     <div className='p-1 flex place-content-between font-bold'> <p>{props.recommendations?.Title}</p>
                         <IoReturnDownBack className='w-[35px] h-7 hover:text-red-600' onClick={onBackClick} />

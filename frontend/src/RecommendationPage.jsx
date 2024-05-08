@@ -19,7 +19,7 @@ function RecommendationPage() {
   const [backgroundImage, setBackgroundImage] = useState('');
   const [input, setInput] = useState('')
   const [modal, setModal] = useState(false)
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
   const [data, setData] = useState([{
     image: '',
     title: '',
@@ -108,6 +108,18 @@ function RecommendationPage() {
         });
 
         setRecommendations(response.data.recommendations);
+        // const imageId = response.data.recommendations[0].Id
+        // console.log(imageId)
+
+
+        // const imageResponse = await axios.get(`https://api.themoviedb.org/3/movie/${imageId}?api_key=86c48e9d929996f5f775aa9b14fdad89`)
+        // console.log(imageResponse)
+        // const path=imageResponse.data.poster_path
+        // setData((prevData) => ({
+        //   ...prevData,
+        //   image: `https://image.tmdb.org/t/p/w500${path}`
+        // }));
+
         console.log(response.data)
       } catch (error) {
         console.error('Error:', error);
@@ -129,6 +141,7 @@ function RecommendationPage() {
     }
 
   };
+  console.log(data.image)
 
   return (
     <div
@@ -213,25 +226,25 @@ function RecommendationPage() {
           {/* {!modal ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} /> : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />} */}
         {/* </div>  */}
         <div className='scroller flex flex-wrap overflow-y-auto h-5/6 ml-11 mr-11 mt-4 place-content-evenly'>
-          {!loading ? 
-          (() => {
-            switch (id) {
-              case 'movies':
-              case 'books':
-                return (!modal
-                  ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} />
-                  : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />
-                );
-              case 'courses':
-                return <CourseComponent />;
+          {!loading ?
+            (() => {
+              switch (id) {
+                case 'movies':
+                case 'books':
+                  return (!modal
+                    ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} />
+                    : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />
+                  );
+                case 'courses':
+                  return <CourseComponent />;
                 case 'restaurants':
-                return <RestaurantComponent />;
-              default:
-                return <div>Invalid category</div>;
-            }
-          })()
-          : <> <Shimmer />  <Shimmer />  <Shimmer /> <Shimmer /> <Shimmer /> </> }
-            {/* This function is now immediately invoked */}
+                  return <RestaurantComponent />;
+                default:
+                  return <div>Invalid category</div>;
+              }
+            })()
+            : <> <Shimmer />  <Shimmer />  <Shimmer /> <Shimmer /> <Shimmer /> </>}
+          {/* This function is now immediately invoked */}
           {/* <MovieComponent backClick={onModalBackClick} info={data && data} recommendations={recommendations && recommendations[index]} /> */}
         </div>
 
