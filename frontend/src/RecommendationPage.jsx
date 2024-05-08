@@ -13,11 +13,13 @@ import RestaurantImage from "./Assets/bg-restaurants.png"
 import axios from 'axios';
 import CourseComponent from './Components/CourseComponent';
 import RestaurantComponent from './Components/RestaurantComponent';
+import Shimmer from './Shimmer';
 function RecommendationPage() {
   const { id } = useParams();
   const [backgroundImage, setBackgroundImage] = useState('');
   const [input, setInput] = useState('')
   const [modal, setModal] = useState(false)
+  const [loading,setLoading]=useState(false)
   const [data, setData] = useState([{
     image: '',
     title: '',
@@ -56,6 +58,7 @@ function RecommendationPage() {
     else if (id === "books") {
       setBackgroundImage(`url(${BookImage})`);
       // setData()
+      setData({ category: "Books", duration: "" })
       setUrl("booksm")
       setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
     }
@@ -95,6 +98,8 @@ function RecommendationPage() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
+
 
     if (id === "movies") {
       try {
@@ -107,6 +112,7 @@ function RecommendationPage() {
       } catch (error) {
         console.error('Error:', error);
       }
+      setLoading(false)
     }
     else {
       try {
@@ -119,6 +125,7 @@ function RecommendationPage() {
       } catch (error) {
         console.error('Error:', error);
       }
+      setLoading(false)
     }
 
   };
@@ -130,7 +137,7 @@ function RecommendationPage() {
     >
       <div className=' w-1/4 m-4'>
         <div className='text-white text-[40px] font-extrabold uppercase text-center p-4'>{id}</div>
-        <div className='bg-[#DBDBDB] p-16 rounded-3xl pr-8 pl-8 text-[18px] font-normal' >
+        <div className='bg-[#F8F8FF] p-16 rounded-3xl pr-8 pl-8 text-[18px] font-semibold' >
           {text}
         </div>
       </div>
@@ -176,15 +183,15 @@ function RecommendationPage() {
           className='absolute inset-0 bg-cover bg-center filter blur-sm'
           style={{ backgroundImage: backgroundImage, zIndex: -1 }}
         />
-        <div >
-          <form onSubmit={handleFormSubmit} method='post' className='bg-[#D9D9D9] w-2/3 m-auto mt-10 h-12 rounded-3xl flex pr-3'>
+        <div>
+          <form onSubmit={handleFormSubmit} method='post' className='bg-[#F8F8FF] w-2/3 m-auto mt-10 h-12 rounded-3xl flex pr-3'>
             <input
               type="text"
               id="movie_name" name="movie_name"
               placeholder='Search'
               value={input}
               onChange={handleChange}
-              className='w-full h-full bg-[#D9D9D9] border-none rounded-3xl text-xl font-normal text-[30px] p-4 border-2 border-white'
+              className='w-full h-full outline-none bg-[#F8F8FF] border-none rounded-3xl text-xl font-normal text-[30px] p-4 border-2 '
             />
             <button className='m-auto' type='submit'>
               <img src={SearchImage} alt="" className='w-[36px] h-[36px] m-auto' />
@@ -205,8 +212,9 @@ function RecommendationPage() {
           }}
           {/* {!modal ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} /> : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />} */}
         {/* </div>  */}
-        <div className='flex flex-wrap overflow-y-auto h-5/6 ml-11 mr-11 mt-4 place-content-evenly'>
-          {(() => {
+        <div className='scroller flex flex-wrap overflow-y-auto h-5/6 ml-11 mr-11 mt-4 place-content-evenly'>
+          {!loading ? 
+          (() => {
             switch (id) {
               case 'movies':
               case 'books':
@@ -221,7 +229,10 @@ function RecommendationPage() {
               default:
                 return <div>Invalid category</div>;
             }
-          })()}  {/* This function is now immediately invoked */}
+          })()
+          : <> <Shimmer />  <Shimmer />  <Shimmer /> <Shimmer /> <Shimmer /> </> }
+            {/* This function is now immediately invoked */}
+          {/* <MovieComponent backClick={onModalBackClick} info={data && data} recommendations={recommendations && recommendations[index]} /> */}
         </div>
 
       </div>

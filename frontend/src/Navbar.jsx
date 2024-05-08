@@ -54,6 +54,10 @@ function Navbar(props) {
     setToken(null);
     localStorage.removeItem('user');
   };
+
+  const handleLogin=()=>{
+    navigate('/login')
+  }
   
   return (
     <div className='bg-zinc-900 text-white font-semibold flex place-content-between text-2xl '>
@@ -62,8 +66,8 @@ function Navbar(props) {
             <div> <Link to="/" >About Us</Link></div>
             <div><Link to="recommenders">Recommendations</Link></div>
             <div><Link to="faq">FAQ's</Link></div>
-            {token && <div className='flex space-x-4 m-auto place-items-center '><IoMdLogOut className='hover:text-red-500'  onClick={handleLogout}/>  
-            {user?.image ? <img src={user?.image} width={30} className='rounded-3xl' alt="" /> : <FaRegUserCircle />  } <p> {user?.displayName}</p>  </div> }
+            {token ? <div className='flex space-x-4 m-auto place-items-center '><IoMdLogOut className='hover:text-red-500'  onClick={handleLogout}/>  
+            {user?.image ? <img src={user?.image} width={30} className='rounded-3xl' alt="" /> : <FaRegUserCircle />  } <p> {user?.displayName}</p>  </div> : <div className='flex space-x-4 m-auto place-items-center ' onClick={handleLogin}> <RiLoginCircleFill className='hover:text-[#3109BA]'/></div>}
         </div>
     </div>
   )

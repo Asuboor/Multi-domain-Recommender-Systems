@@ -56,7 +56,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={token ? <Home /> : <Navigate to="/login" />}
+          element={<Home />}
         />
         <Route
           path="/recommenders"
