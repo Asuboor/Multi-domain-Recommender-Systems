@@ -114,8 +114,8 @@ def coursera():
 @app.route('/restaurants', methods=['GET', 'POST'])
 def recommend_restaurants():
     if request.method == 'POST':
-        city_name = request.form['city_name']
-        restaurant_name = request.form['restaurant_name']
+        city_name = request.json['city_name']
+        restaurant_name = request.json['restaurant_name']
         restaurant_recommender = RestaurantRecommender()
         recommendations = restaurant_recommender.recommend_bow_city(restaurant_name, city_name)
         response = make_response({"recommendations": recommendations})
