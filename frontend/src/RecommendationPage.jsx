@@ -204,7 +204,7 @@ function RecommendationPage() {
               placeholder='Search'
               value={input}
               onChange={handleChange}
-              className='w-full h-full outline-none bg-[#F8F8FF] border-none rounded-3xl text-xl font-normal text-[30px] p-4 border-2 '
+              className='w-full h-full outline-none bg-[#F8F8FF] border-none rounded-3xl  font-normal text-[15px] md:text-[20px] p-4 border-2 '
             />
             <button className='m-auto' type='submit'>
               <img src={SearchImage} alt="" className='w-[36px] h-[36px] m-auto' />
@@ -225,7 +225,7 @@ function RecommendationPage() {
           }}
           {/* {!modal ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} /> : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />} */}
         {/* </div>  */}
-        <div className='scroller flex flex-wrap overflow-y-auto h-5/6 ml-11 mr-11 mt-4 place-content-evenly'>
+        <div className='scroller flex flex-wrap overflow-y-auto h-5/6 ml-2 mr-2 lg:ml-11 lg:mr-11 mt-4 place-content-evenly'>
           {!loading ?
             (() => {
               switch (id) {

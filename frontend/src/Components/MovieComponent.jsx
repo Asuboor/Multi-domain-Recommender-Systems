@@ -43,28 +43,28 @@ function MovieComponent({ backClick, ...props }) {
 
             {/* Testing */}
 
-            <div className='bg-[#F8F8FF] border-4 border-[#3109BA] flex  max-w-5/6 rounded-xl '  >
+            <div className='bg-[#F8F8FF] border-4 border-[#3109BA] flex flex-col  md:flex-row  md:max-w-5/6 rounded-xl items-center md:items-start '  >
                 <div className='m-4  w-1/3 '>
                     <img src={props.recommendations?.Image ? props.recommendations?.Image : Movies} alt="" className=' rounded-lg '   />
                 </div>
-                <div className='w-2/3'>
-                <div className=' text-[30px] p-2 font-semibold text-white bg-[#674CC4] m-2 rounded-xl'>
+                <div className=' md:w-2/3 '>
+                <div className='text-[20px] md:text-[30px] p-2 font-semibold text-white bg-[#674CC4] m-2 rounded-xl'>
                     <div className='p-1 flex place-content-between font-bold'> <p>{props.recommendations?.Title}</p>
                         <IoReturnDownBack className='w-[35px] h-7 hover:text-red-600' onClick={onBackClick} />
                     </div>
-                    <div className='flex text-[14px] place-content-evenly'>
+                    <div className='flex text-[12px] md:text-[14px] place-content-evenly'>
                         <div className='bg-zinc-900 p-1 rounded-md text-[12px]'>EN</div>
                         <div className='flex place-items-center gap-1'> <FaStar />{props?.recommendations['Vote Average'] || props?.recommendations?.Rating}</div>
                         <div className='flex place-items-center gap-1'><FaCalendar />{props?.recommendations['Release Date']}</div>
                         <div className='flex place-items-center gap-1'> {props.info?.duration === "min" ? <IoIosTime /> : <IoBookSharp />} {props.recommendations?.Runtime || props.recommendations?.Pages} {props.info?.duration}</div>
                     </div>
                 </div>
-                <div className=' rounded-lg m-2  place-content-evenly  font-medium text-[15px] ml-4 '>
+                <div className=' rounded-lg m-2  place-content-evenly  font-medium text-[12px] md:text-[15px] ml-4 '>
                     <div>Cast : {props?.recommendations?.Cast || props?.recommendations?.Author}</div>
                     <div>Genre : {props?.recommendations?.Genres}</div>
                     {/* <div>Scores: 9.03 by 1800 views</div> */}
                 </div>
-                <div className='m-2 mt-4 text-[15px]  font-semibold p-1 ml-3
+                <div className='m-2 mt-4 text-[12px] md:text-[15px]  font-semibold p-1 ml-3
 
 '>
                     {props?.recommendations?.Overview}

@@ -7,7 +7,7 @@ function Faq() {
   return (
     <div className='flex m-2 lg:m-14'>
       <div className=' w-full lg:w-1/2'>
-        <div className='font-extrabold text-[25px] mdtext-[40px] ml-2'>
+        <div className='font-extrabold text-[25px] md:text-[40px] ml-2'>
           <p className='text-white'>Your Queries</p>
           <p className='text-[#595FF0]'>Our Solutions</p>
         </div>
