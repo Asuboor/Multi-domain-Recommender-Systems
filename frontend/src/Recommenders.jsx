@@ -63,7 +63,7 @@ function Recommenders() {
             <div className='flex h-[92px] w-[92px] mb-2 mt-4 m-auto justify-center'><img src={course} alt="" /></div>
             <div className='text-center font-bold text-[30px]'>ONLINE COURSES</div>
           </Link>
-          <Link to={`/recommenders/movies`} className='bg-[#F8F8FF] m-16 w-[332px] h-[176px] rounded-[40px] border-[6px] border-[#3109BA]'>
+          <Link to={`/recommenders/web-series`} className='bg-[#F8F8FF] m-16 w-[332px] h-[176px] rounded-[40px] border-[6px] border-[#3109BA]'>
             <div className='flex h-[92px] w-[92px] mb-2 mt-4 m-auto justify-center'><img src={webseries} alt="" /></div>
             <div className='text-center font-bold text-[30px]'>WEB SERIES</div>
           </Link>

@@ -37,6 +37,12 @@ function RecommendationPage() {
   const [recommendations, setRecommendations] = useState([]);
   const [index, setIndex] = useState()
   const [text, setText] = useState("")
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    setUrl(event.target.value); // Log the selected value to the console
+  };
 
   function onModalClick(index) {
     setModal(!modal)
@@ -64,14 +70,20 @@ function RecommendationPage() {
     }
     else if (id === "courses") {
       setBackgroundImage(`url(${CourseImage})`);
-      setData({ category: "Book", duration: "" })
-      // setUrl("booksm")
+      // setData({ category: "Book", duration: "" })
+      // setUrl("udemy")
       setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
     }
     else if (id === "restaurants") {
       setBackgroundImage(`url(${RestaurantImage})`);
       setData({ category: "Book", duration: "" })
       // setUrl("booksm")
+      setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
+    }
+    else if (id === "web-series") {
+      setBackgroundImage(`url(${MovieImage})`);
+      setData({ category: "Web-Series", duration: "/episode" })
+      setUrl("webseries")
       setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
     }
     else {
@@ -120,6 +132,47 @@ function RecommendationPage() {
         //   image: `https://image.tmdb.org/t/p/w500${path}`
         // }));
 
+        console.log(response.data)
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      setLoading(false)
+    }
+    else if (id === "courses") {
+      if (selectedOption === "udemy") {
+        try {
+          const response = await axios.post(`http://localhost:5000/${url}`, {
+            title_utf: input,
+          });
+
+          setRecommendations(response.data.recommendations);
+          console.log(response.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      else {
+        try {
+          const response = await axios.post(`http://localhost:5000/${url}`, {
+            course_name: input,
+          });
+
+          setRecommendations(response.data.recommendations);
+          console.log(response.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      setLoading(false)
+    }
+    else if(id === "web-series") {
+      try {
+        const response = await axios.post(`http://localhost:5000/${url}`, {
+          series_name: input,
+        });
+
+        setRecommendations(response.data.recommendations);
         console.log(response.data)
       } catch (error) {
         console.error('Error:', error);
@@ -206,10 +259,23 @@ function RecommendationPage() {
               onChange={handleChange}
               className='w-full h-full outline-none bg-[#F8F8FF] border-none rounded-3xl  font-normal text-[15px] md:text-[20px] p-4 border-2 '
             />
+
             <button className='m-auto' type='submit'>
               <img src={SearchImage} alt="" className='w-[36px] h-[36px] m-auto' />
             </button>
+
           </form>
+          {id === "courses" && <div className='flex place-content-center text-white space-x-4 mt-2'>
+            <label>
+              <input type='radio' name='platform' value='udemy' checked={selectedOption === 'udemy'} onChange={handleOptionChange} />
+              Udemy
+            </label>
+            <label>
+              <input type='radio' name='platform' value='coursera' checked={selectedOption === 'coursera'} onChange={handleOptionChange} />
+              Coursera
+            </label>
+          </div>}
+
         </div>
         {/* <div className='flex flex-wrap overflow-y-auto h-5/6 ml-11 mr-11 mt-4 place-content-evenly'>
           {()=>{
@@ -231,12 +297,13 @@ function RecommendationPage() {
               switch (id) {
                 case 'movies':
                 case 'books':
+                case 'web-series':
                   return (!modal
                     ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} />
                     : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />
                   );
                 case 'courses':
-                  return <CourseComponent />;
+                  return <CourseComponent recommendations={recommendations} />;
                 case 'restaurants':
                   return <RestaurantComponent />;
                 default:

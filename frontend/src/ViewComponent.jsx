@@ -19,9 +19,9 @@ function ViewComponent({ titleClick, ...props }) {
             <div>|</div>
             <div>{recommendation['Release Date'] ||  "★" + recommendation?.Rating }</div>
             <div>|</div>
-            <div>{(recommendation?.Runtime || recommendation?.Pages) + " " + props.info?.duration}</div>
+            <div>{ recommendation?.Duration ? recommendation?.Duration  + props.info?.duration :  (recommendation?.Runtime || recommendation?.Pages) + " " + props.info?.duration}</div>
           </div>
-          <button className='text-center text-[17px] lg:text-[20px]  font-semibold text-black m-auto flex hover:text-[#3109BA]' onClick={onTitleClick(index)}>{recommendation?.Title}</button>
+          <button className='text-center text-[17px] lg:text-[20px]  font-semibold text-black m-auto flex hover:text-[#3109BA]' onClick={onTitleClick(index)}>{recommendation?.Series ? recommendation?.Series : recommendation?.Title}</button>
         </div>
       ))}
     </>
