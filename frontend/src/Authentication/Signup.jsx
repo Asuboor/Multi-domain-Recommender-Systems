@@ -52,10 +52,10 @@ function Signup() {
 };
 
     return (
-        <div className='flex m-14'>
-            <div className='w-1/2 text-white m-5 '>
-                <div className='font-extrabold text-[40px] text-center'>Let’s create your account</div>
-                <div className='text-center text-[16px] font-semibold'>Sign up and get free recommendations.</div>
+        <div className='flex m-auto md:m-auto'>
+            <div className='xl:w-1/2 text-white m-1 md:m-5   md:w-full'>
+                <div className='font-extrabold text-[25px] md:text-[40px] text-center'>Let’s create your account</div>
+                <div className='text-center text-[12px] md:text-[16px] font-semibold'>Sign up and get free recommendations.</div>
                 <div className='w-4/5 m-auto mt-5 text-[16px] font-extralight space-y-2'>
                     <div className='  '>Name</div>
                     <input type="text" className='bg-[#16161D] border-none w-full font-medium outline-none'  name="displayName" value={formData.displayName} onChange={handleChange} required />
@@ -70,13 +70,13 @@ function Signup() {
                     <input type="password" className='bg-[#16161D] border-none w-full outline-none' name='confirmpassword' />
                     <p className='border-[2px] border-[#7F75A2] w-full'></p>
                 </div>
-                <button className='m-auto flex mt-10 w-3/4 place-content-center p-3 bg-[#674CC4] rounded-[30px] font-bold text-[21px] hover:opacity-80' onClick={handleSubmit}>Sign Up</button>
+                <button className='m-auto flex mt-10 w-3/4 place-content-center p-3 bg-[#674CC4] rounded-[30px] font-bold text-[16px] md:text-[21px] hover:opacity-80' onClick={handleSubmit}>Sign Up</button>
                 <div className='w-4/5 m-auto mt-10 text-[16px] font-medium flex place-content-between '>
                     <div> Already have an account??</div>
                     <button className='text-[#1A8FE3]' onClick={() => { navigate('/login') }}>Login</button>
                 </div>
             </div>
-            <div className='w-1/2'>
+            <div className='hidden m-auto lg:block lg:w-1/2'>
                 <img src={authImage} alt="" />
             </div>
         </div>

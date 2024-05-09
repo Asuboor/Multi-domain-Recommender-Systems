@@ -1,76 +1,80 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import Home from './Home'
-import Recommenders from './Recommenders'
-import Faq from './Faq'
-import { useNavigate } from 'react-router-dom';
+
+
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoMdLogOut } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiLoginCircleFill } from "react-icons/ri";
-import axios from 'axios'
+import { GiHamburgerMenu } from "react-icons/gi"; // Icon for the hamburger menu
+import axios from 'axios';
 
 function Navbar(props) {
-
   const navigate = useNavigate();  
-  console.log(document.cookie)
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false); // State for mobile menu toggle
 
-  console.log(props.click)
-
-  const getTokenFromCookie = () => {
+  useEffect(() => {
     const cookies = document.cookie.split('; ');
     for (const cookie of cookies) {
       const [name, value] = cookie.split('=');
       if (name === 'token') {
-        return value;
+        setToken(value);
+        break;
       }
     }
-    return null;
-  };
-
-  const [token, setToken] = useState(getTokenFromCookie());
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-      // Check if user data exists in local storage
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-          setUser(JSON.parse(storedUser));
-      }
-      else{
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
       axios.get('http://localhost:6005/auth/user')
-    .then(res => {
-      setUser(res.data);
-      localStorage.setItem('user');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }}, []);
-  console.log(user)
+        .then(res => {
+          setUser(res.data);
+          localStorage.setItem('user', JSON.stringify(res.data));
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }, []);
 
   const handleLogout = () => {
-    // navigate('/login');
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
     setToken(null);
     localStorage.removeItem('user');
+    navigate('/login');
   };
 
-  const handleLogin=()=>{
-    navigate('/login')
-  }
-  
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
-    <div className='bg-zinc-900 text-white font-semibold flex place-content-between text-2xl '>
-        <div className='m-8'>Logo</div>
-        <div className='flex m-8 space-x-24 pr-20'>
-            <div> <Link to="/" >About Us</Link></div>
-            <div><Link to="recommenders">Recommendations</Link></div>
-            <div><Link to="faq">FAQ's</Link></div>
-            {token ? <div className='flex space-x-4 m-auto place-items-center '><IoMdLogOut className='hover:text-red-500'  onClick={handleLogout}/>  
-            {user?.image ? <img src={user?.image} width={30} className='rounded-3xl' alt="" /> : <FaRegUserCircle />  } <p> {user?.displayName}</p>  </div> : <div className='flex space-x-4 m-auto place-items-center ' onClick={handleLogin}> <RiLoginCircleFill className='hover:text-[#3109BA]'/></div>}
+    <nav className='bg-zinc-900 text-white font-semibold'>
+      <div className='flex justify-between items-center p-5'>
+        <div className='text-2xl'>Logo</div>
+        <div className='md:hidden'>
+          <GiHamburgerMenu onClick={() => setIsOpen(!isOpen)} className='text-2xl cursor-pointer'/>
         </div>
-    </div>
-  )
+        <div className={`${isOpen ? 'block' : 'hidden'} absolute  md:relative w-full md:w-auto md:flex flex-grow items-center bg-zinc-900 md:bg-transparent z-20 left-0 md:left-auto top-16 md:top-auto md:place-content-end lg:place-content-end  xl:place-content-end text-[25px] gap-4`}>
+          <Link to="/" className='block py-2 md:py-0 px-4 w-full md:w-auto text-center'>About Us</Link>
+          <Link to="recommenders" className='block py-2 md:py-0 px-4 w-full md:w-auto text-center'>Recommendations</Link>
+          <Link to="faq" className='block py-2 md:py-0 px-4 w-full md:w-auto text-center'>FAQ's</Link>
+          {token ? (
+            <div className='flex items-center space-x-4 '>
+              <IoMdLogOut className='hover:text-red-500 cursor-pointer' onClick={handleLogout} />
+              {user?.image ? <img src={user?.image} width={30} className='rounded-full' alt="" /> : <FaRegUserCircle />}
+              <p>{user?.displayName}</p>
+            </div>
+          ) : (
+            <div className='flex items-center space-x-4  cursor-pointer' onClick={handleLogin}>
+              <RiLoginCircleFill className='hover:text-[#3109BA]'/>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
