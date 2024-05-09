@@ -148,13 +148,13 @@ function RecommendationPage() {
       className='flex h-screen '
     // Apply dynamic background image
     >
-      <div className=' w-1/4 m-4'>
+      <div className='hidden  xl:block xl:w-1/4 m-4'>
         <div className='text-white text-[40px] font-extrabold uppercase text-center p-4'>{id}</div>
         <div className='bg-[#F8F8FF] p-16 rounded-3xl pr-8 pl-8 text-[18px] font-semibold' >
           {text}
         </div>
       </div>
-      <div className='bg-white border-8 rounded-md'></div>
+      <div className=' hidden xl:block bg-white border-8 rounded-md'></div>
       {/* <div className='w-3/4 ml-4' style={{ backgroundImage: backgroundImage, opacity: "50%" }}>
         <div className='bg-[#D9D9D9]  w-2/3 m-auto mt-10 h-12   rounded-3xl flex pr-3'>
           <input type="text" name="" id="" className='w-full h-full bg-[#D9D9D9] border-none rounded-3xl text-xl font-normal text-[30px] p-4 border-2 border-white' />
@@ -191,7 +191,7 @@ function RecommendationPage() {
 
       </div> */}
 
-      <div className='w-3/4 ml-4 relative overflow-y-auto'>
+      <div className='w-full xl:w-3/4 ml-4 relative overflow-y-auto'>
         <div
           className='absolute inset-0 bg-cover bg-center filter blur-sm'
           style={{ backgroundImage: backgroundImage, zIndex: -1 }}

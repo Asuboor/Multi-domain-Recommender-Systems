@@ -69,14 +69,14 @@ function ChatComponent() {
     };
 
     return (
-        <div className='bg-[#F8F8FF] rounded-[40px] border-[4px] border-[#2C0AA0] pr-2 m-auto w-2/5 h-[590px] mt-4 flex flex-col'>
-            <div id="chat-container" className='scroller h-5/6 p-8 flex flex-col overflow-y-auto'>
+        <div className='bg-[#F8F8FF] rounded-[40px] border-[4px] border-[#2C0AA0] pr-2 m-auto w-full md:w-2/5 h-[590px] mt-4 flex flex-col'>
+            <div id="chat-container" className='scroller h-5/6 p-2 md:p-8 flex flex-col overflow-y-auto'>
                 {chatEntries.map((entry, index) => (
-                    <div key={index} className={`bg-[#595FF0] rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px] text-[18px] font-medium text-white min-w-20 max-w-72 p-4 m-1 ${entry.type === 'user' ? 'self-end' : 'self-start'}`}>
+                    <div key={index} className={`bg-[#595FF0]  text-[12px] md:text-[18px] font-medium text-white min-w-10 md:min-w-20 max-w-72 p-3 md:p-4 m-1 ${entry.type === 'user' ? 'self-end rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px]' : 'self-start rounded-t-[25px] rounded-tr-[15px] rounded-br-[20px] rounded-bl-[0px]'}`}>
                         {entry.text}
                     </div>
                 ))}
-                {isLoading && <div className="bg-[#595FF0] rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px] text-[18px] font-medium text-white min-w-20 max-w-72 p-4 m-1 self-start">
+                {isLoading && <div className="bg-[#595FF0] rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px] text-[12px] md:text-[18px] font-medium text-white min-w-20 max-w-72 p-4 m-1 self-start">
                     <ThreeDots
                         visible={true}
                         height="25"
@@ -88,11 +88,11 @@ function ChatComponent() {
                         wrapperClass=""
                     /></div>}
             </div>
-            <div className='m-5 bg-[#595FF0] rounded-[30px] flex'>
+            <div className=' m-2 md:m-5 bg-[#595FF0] rounded-[30px] flex'>
                 <input
                     type="text"
                     placeholder='Enter short description to get recommended'
-                    className='bg-[#595FF0] rounded-[30px] h-14 p-4 w-10/12 font-medium text-white text-[20px] outline-none'
+                    className='bg-[#595FF0] rounded-[30px] h-14 p-4 w-10/12 font-medium text-white text-[12px] md:text-[20px] outline-none'
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyPress={(e) => {
@@ -102,7 +102,7 @@ function ChatComponent() {
                     }}
                 />
 
-                <div className='m-auto p-3 bg-[#F8F8FF] rounded-[12px]' onClick={handleSendMessage}>
+                <div className='m-auto p-1 md:p-3 bg-[#F8F8FF] rounded-[12px]' onClick={handleSendMessage}>
                     <img src={Send} alt="" width={20} />
                 </div>
             </div>

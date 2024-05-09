@@ -61,7 +61,7 @@ function Navbar(props) {
           <Link to="recommenders" className='block py-2 md:py-0 px-4 w-full md:w-auto text-center'>Recommendations</Link>
           <Link to="faq" className='block py-2 md:py-0 px-4 w-full md:w-auto text-center'>FAQ's</Link>
           {token ? (
-            <div className='flex items-center space-x-4 '>
+            <div className='flex justify-center items-center space-x-4 '>
               <IoMdLogOut className='hover:text-red-500 cursor-pointer' onClick={handleLogout} />
               {user?.image ? <img src={user?.image} width={30} className='rounded-full' alt="" /> : <FaRegUserCircle />}
               <p>{user?.displayName}</p>
