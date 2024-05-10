@@ -14,7 +14,7 @@ import {useNavigate} from "react-router-dom"
 
 function Home() {
   const navigate=useNavigate()
-  const currentYear = new Date().getFullYear();
+
   return (
     <div className='font-[Amaranth]'>
       <div className='text-[#595FF0] place-content-center flex font-semibold text-[60px] mt-4'>RECOM-AI</div>
@@ -112,9 +112,7 @@ function Home() {
           </div>
         </button>
       </div>
-      <footer className='m-10 border-t-4 p-4 border-[#29293C] text-white text-[20px] text-center'>
-      <p>&copy; {currentYear} Recom-Ai. All rights reserved.</p>
-      </footer>
+      
     </div>
   )
 }

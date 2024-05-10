@@ -1,34 +1,4 @@
-// import React from "react";
-// import { Route, Routes } from "react-router-dom";
-// import Home from "./Home";
-// import Recommenders from "./Recommenders";
-// import Faq from "./Faq";
-// import Navbar from "./Navbar";
-// import RecommendationPage from "./RecommendationPage";
-// import DummyTest from "./DummyTest";
-// import LoginPage from "./Authentication/LoginPage";
-// import Signup from "./Authentication/Signup";
 
-// function App() {
-//   return (
-//     <div className="">
-//       <Navbar />
-//       <Routes>
-//         <Route exact path="/" Component={Home} />
-//         <Route exact path="/login" Component={LoginPage} />
-//         <Route exact path="/signup" Component={Signup} />
-//         <Route path="/recommenders" Component={Recommenders} />
-//         <Route path="faq" Component={Faq} />
-//         <Route path="/recommenders/:id" Component={RecommendationPage} />
-//       </Routes>
-
-//       {/* -------------- */}
-//       {/* <DummyTest/> */}
-//     </div>
-//   );
-// }
-
-// export default App;
 
 
 import React, { useState } from "react";
@@ -40,6 +10,7 @@ import Home from "./Home";
 import Recommenders from "./Recommenders";
 import Faq from "./Faq";
 import RecommendationPage from "./RecommendationPage";
+import Footer from "./Footer";
 
 
 function App() {
@@ -79,6 +50,7 @@ function App() {
           element={token ? <Navigate to="/" /> : <Signup />}
         />
       </Routes>
+      <Footer />
     </div>
   );
 }
