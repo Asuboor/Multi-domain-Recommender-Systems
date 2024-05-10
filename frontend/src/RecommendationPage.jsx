@@ -13,6 +13,7 @@ import RestaurantImage from "./Assets/bg-restaurants.png"
 import axios from 'axios';
 import CourseComponent from './Components/CourseComponent';
 import RestaurantComponent from './Components/RestaurantComponent';
+import WebSeries from "./Assets/bg-webseries.jpeg"
 import Shimmer from './Shimmer';
 function RecommendationPage() {
   const { id } = useParams();
@@ -55,23 +56,27 @@ function RecommendationPage() {
   }
 
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (id === "restaurants") {
+
+
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
-                    .then(response => response.json())
-                    .then(data => setCity(data.city))
-                    .catch(error => setError(error));
-            },
-            (error) => {
-                setError(error.message);
-            }
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+              .then(response => response.json())
+              .then(data => setCity(data.city))
+              .catch(error => setError(error));
+          },
+          (error) => {
+            setError(error.message);
+          }
         );
-    } else {
+      } else {
         setError('Geolocation is not supported by this browser.');
+      }
     }
-}, []);
+  }, []);
 
 
   useEffect(() => {
@@ -103,7 +108,7 @@ function RecommendationPage() {
       setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
     }
     else if (id === "web-series") {
-      setBackgroundImage(`url(${MovieImage})`);
+      setBackgroundImage(`url(${WebSeries})`);
       setData({ category: "Web-Series", duration: "/episode" })
       setUrl("webseries")
       setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
@@ -188,7 +193,7 @@ function RecommendationPage() {
 
       setLoading(false)
     }
-    else if(id === "web-series") {
+    else if (id === "web-series") {
       try {
         const response = await axios.post(`http://localhost:5000/${url}`, {
           series_name: input,
@@ -201,12 +206,12 @@ function RecommendationPage() {
       }
       setLoading(false)
     }
-    else if(id === "restaurants") {
+    else if (id === "restaurants") {
       try {
         const response = await axios.post(`http://localhost:5000/${url}`, {
-          city_name:city,
-          restaurant_name:input
-      });
+          city_name: city,
+          restaurant_name: input
+        });
 
         setRecommendations(response.data.recommendations);
         console.log(response.data)

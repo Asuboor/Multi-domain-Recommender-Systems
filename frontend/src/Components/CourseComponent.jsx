@@ -7,7 +7,7 @@ function CourseComponent(props) {
     return (
         <>
             {props?.recommendations.map((course, index)=> (
-                <div className='bg-[#F8F8FF] w-1/3 rounded-[35px] border-4 border-[#595FF0] m-4 ' key={index}>
+                <div className='bg-[#F8F8FF] w-full md:w-1/2 lg:w-1/3 rounded-[35px] border-4 border-[#595FF0] m-1  md:m-4 lg-m-4' key={index}>
                     <img src={course?.Skills ? Coursera : Udemy} alt="" className='p-2 w-full rounded-[20px] border-1 border-[#595FF0]' />
                     <div className='m-4 pl-3 pr-3'>
                         <div className='flex place-content-between font-bold text-[22px]' >
