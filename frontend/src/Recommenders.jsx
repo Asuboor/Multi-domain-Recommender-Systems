@@ -63,25 +63,25 @@ function Recommenders() {
             <p class="rectitle text-center mt-2  font-bold text-[30px] ">MOVIES</p>
           </div>
         </button>
-        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/movies')}}>
+        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/books')}}>
           <div class="reccard2-info place-content-center">
           <MdMenuBook color='white' className='m-auto' size={80}/>
             <p class="rectitle text-center mt-2  font-bold text-[30px] ">BOOKS</p>
           </div>
         </button>
-        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/movies')}}>
+        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/restaurants')}}>
           <div class="reccard2-info place-content-center">
           <RiRestaurantFill color='white' className='m-auto' size={80}/>
             <p class="rectitle text-center mt-2  font-bold text-[30px] ">RESTAURANTS</p>
           </div>
         </button>
-        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/movies')}}>
+        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/courses')}}>
           <div class="reccard2-info place-content-center">
           <FaComputer color='white' className='m-auto' size={80}/>
             <p class="rectitle text-center mt-2  font-bold text-[30px] ">ONLINE COURSES</p>
           </div>
         </button>
-        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/movies')}}>
+        <button class="reccard2 w-56 h-72 mb-8" onClick={()=>{navigate('/recommenders/web-series')}}>
           <div class="reccard2-info place-content-center">
           <BiMoviePlay  color='white' className='m-auto' size={80}/>
             <p class="rectitle text-center mt-2  font-bold text-[30px] ">WEB SERIES</p>

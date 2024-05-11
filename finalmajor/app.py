@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request,make_response
+from flask import Flask, render_template, request,make_response,jsonify
 from models.courserarec import CourseRecommender
 from models.movierec import MovieRecommender
 from models.bookrec import BookRecommender  
@@ -10,6 +10,7 @@ from models.restrec import RestaurantRecommender
 from models.udemy import UdemyRecommender
 from models.webseriesrec import WebSeriesRecommender
 from flask_cors import CORS
+import json
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -127,6 +128,23 @@ def recommend_restaurants():
     #     return render_template('restaurants.html', recommendations=recommendations, city_name=city_name, restaurant_name=restaurant_name)
     # return render_template('restaurants.html', recommendations=None)
 
+# testing
+
+# @app.route('/data.json')
+# def get_data():
+#     # Load PKL file
+#     with open('udemy_clean.pkl', 'rb') as f:
+#         data = pickle.load(f)
+    
+#     # Convert to JSON
+#     json_data = [{'key': key, 'value': value} for key, value in data.items()]
+#     print(json_data)
+#     return jsonify(json_data)
+
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Change the host parameter to '0.0.0.0' to listen on all network interfaces
+    app.run(host='0.0.0.0', port=5000)
+

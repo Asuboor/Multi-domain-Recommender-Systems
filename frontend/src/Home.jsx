@@ -118,3 +118,49 @@ function Home() {
 }
 
 export default Home
+
+// import React, { useState, useEffect } from 'react';
+
+// function App() {
+//   const [inputValue, setInputValue] = useState('');
+//   const [suggestions, setSuggestions] = useState([]);
+//   useEffect(() => {
+//     fetch('http://localhost:5000/data.json')  // Adjust the path to your JSON file
+//       .then(response => response.json())
+//       .then(data => {
+//         // Extract keys from JSON data
+//         setSuggestions(data);
+//       })
+//       .catch(error => console.error('Error fetching JSON data:', error));
+//   }, []);
+  
+  
+
+//   const handleInputChange = (event) => {
+//     setInputValue(event.target.value);
+//   };
+//   console.log(suggestions)
+
+//   const filteredSuggestions = suggestions?.filter((suggestion) =>
+//     suggestion?.toLowerCase().includes(inputValue.toLowerCase())
+//   );
+
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         value={inputValue}
+//         onChange={handleInputChange}
+//         list="suggestions"
+//         placeholder="Type something..."
+//       />
+//       <datalist id="suggestions">
+//         {filteredSuggestions.map((suggestion, index) => (
+//           <option key={index} value={suggestion} />
+//         ))}
+//       </datalist>
+//     </div>
+//   );
+// }
+
+// export default App;

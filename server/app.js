@@ -52,6 +52,10 @@ mongoose.connect(DB).then(()=> console.log("Db connected")).catch((error)=>conso
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get("/",(req,res)=>{
+  res.send("Hello from nodejs server")
+})
 // --testing--
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 app.post("/generate", async (req, res) => {
