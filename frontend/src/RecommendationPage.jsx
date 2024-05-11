@@ -15,6 +15,11 @@ import CourseComponent from './Components/CourseComponent';
 import RestaurantComponent from './Components/RestaurantComponent';
 import WebSeries from "./Assets/bg-webseries.jpeg"
 import Shimmer from './Shimmer';
+import Movie from "./Assets/movie-info.jpg"
+import Books from "./Assets/info-books.jpg"
+import Restaurant from "./Assets/info-restaurant.jpg"
+import Courses from "./Assets/info-courses.jpg"
+import Binge from "./Assets/info-binge.jpg"
 function RecommendationPage() {
   const { id } = useParams();
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -41,6 +46,7 @@ function RecommendationPage() {
   const [selectedOption, setSelectedOption] = useState('');
   const [city, setCity] = useState('');
   const [error, setError] = useState(null);
+  const [image,setImage]=useState('')
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -85,7 +91,8 @@ function RecommendationPage() {
       setBackgroundImage(`url(${MovieImage})`);
       setData({ category: "Movie", duration: "min" })
       setUrl("moviesm")
-      setText("Explore endless cinematic possibilities with our movie recommender system! Whether you crave heart-pounding action, spine-tingling thrillers, or heartwarming dramas, we've got you covered. Discover hidden gems and blockbuster hits tailored to your unique tastes and preferences. From timeless classics to the latest releases, our algorithm ensures personalized recommendations that guarantee an unforgettable movie-watching experience. Say goodbye to endless scrolling and hello to movie nights filled with excitement and joy. Let our recommender system be your ultimate guide to the mesmerizing world of cinema. Sit back, relax, and let the magic of movies unfold before your eyes")
+      setImage(Movie)
+      setText("Discover cinematic gems handpicked just for you by our intuitive recommender system.")
 
     }
     else if (id === "books") {
@@ -93,25 +100,29 @@ function RecommendationPage() {
       // setData()
       setData({ category: "Books", duration: "" })
       setUrl("booksm")
-      setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
+      setImage(Books)
+      setText("Dive into captivating reads perfectly matched to your preferences by our personalized recommendation engine.")
     }
     else if (id === "courses") {
       setBackgroundImage(`url(${CourseImage})`);
       // setData({ category: "Book", duration: "" })
       // setUrl("udemy")
-      setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
+      setImage(Courses)
+      setText("Empower your learning journey with courses curated just for you by our intelligent recommender system.")
     }
     else if (id === "restaurants") {
       setBackgroundImage(`url(${RestaurantImage})`);
       // setData({ category: "Book", duration: "" })
       setUrl("restaurants")
-      setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
+      setImage(Restaurant)
+      setText("Explore culinary delights recommended exclusively for you by our expert system.")
     }
     else if (id === "web-series") {
       setBackgroundImage(`url(${WebSeries})`);
       setData({ category: "Web-Series", duration: "/episode" })
       setUrl("webseries")
-      setText("Discover your next literary adventure with our book recommender system. Whether you crave heart-pounding thrillers, thought-provoking classics, or enchanting fantasies, our algorithm tailors recommendations to your unique tastes. By analyzing your reading history, preferences, and genre interests, we curate a personalized list of titles you're sure to love. From bestsellers to hidden gems, embark on a journey through worlds unknown. Expand your literary horizons and find your next page-turner effortlessly. With our book recommender system, the perfect book is just a click away, waiting to transport you to new realms of imagination and discovery.")
+      setImage(Binge)
+      setText("Uncover binge-worthy series tailored to your taste, thanks to our smart recommendations.")
     }
     else {
       // Set default background if id is not recognized
@@ -245,6 +256,7 @@ function RecommendationPage() {
       <div className='hidden  xl:block xl:w-1/4 m-4'>
         <div className='text-white text-[40px] font-extrabold uppercase text-center p-4'>{id}</div>
         <div className='bg-[#F8F8FF] p-16 rounded-3xl pr-8 pl-8 text-[18px] font-semibold' >
+          <img src={image} alt="" className='mb-4' />
           {text}
         </div>
       </div>

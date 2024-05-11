@@ -257,3 +257,86 @@ code {
   transform: scale(0.95);
 }
 
+/* Recommenders card */
+/* styles.css */
+
+
+/* .border-gradient-to-l::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 5px solid transparent; /* Adjust border size as needed */
+  /* border-image-slice: 1; */
+  /* border-image-source: linear-gradient(to left, #595FF0, #ea5358); */
+  /* pointer-events: none; */
+  /* border-radius: 40px; */
+/* } */ 
+
+/* styles.css */
+
+
+/* Additional styles to adjust the size of the pseudo-element */
+
+/* .reccard .card2-info {
+  width: 332px;
+  height: 176px;
+} */
+
+.reccard2 {
+  --background: linear-gradient(to left, #595FF0 0%, #ea5358 100%);
+  width: 332px;
+  height: 176px;
+  padding: 5px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #f7ba2b;
+  /* background:#595FF0; */
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+}
+
+.reccard2::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(25px);
+  background: #f7ba2b;
+  background: var(--background);
+  transition: opacity .5s;
+}
+
+.reccard2-info {
+  --color: #181818;
+  background: var(--color);
+  color: var(--color);
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+}
+
+.reccard2 .rectitle {
+  /* font-weight: bold; */
+  letter-spacing: .1em;
+  /* Update title font color to white */
+  color: white;
+  /* Ensure the text is always visible */
+  position: relative;
+  z-index: 1;
+}
+
+
+
