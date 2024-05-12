@@ -153,7 +153,7 @@ function RecommendationPage() {
 
     if (id === "movies") {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
           movie_name: input,
         });
 
@@ -179,7 +179,7 @@ function RecommendationPage() {
     else if (id === "courses") {
       if (selectedOption === "udemy") {
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
             title_utf: input,
           });
 
@@ -191,7 +191,7 @@ function RecommendationPage() {
       }
       else {
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
             course_name: input,
           });
 
@@ -206,7 +206,7 @@ function RecommendationPage() {
     }
     else if (id === "web-series") {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
           series_name: input,
         });
 
@@ -219,7 +219,7 @@ function RecommendationPage() {
     }
     else if (id === "restaurants") {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
           city_name: city,
           restaurant_name: input
         });
@@ -233,7 +233,7 @@ function RecommendationPage() {
     }
     else {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://35.153.137.189:5000/${url}`, {
           book_name: input,
         });
 

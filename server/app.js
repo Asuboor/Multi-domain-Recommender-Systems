@@ -19,7 +19,7 @@ const app = express();
 // }));
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://35.153.137.189:3000',
   methods: "GET,POST,PUT,DELETE", // This should match the URL of your frontend
   credentials: true, // This allows the server to accept credentials (cookies, authorization headers, etc.) from the frontend
 };
