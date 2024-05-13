@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import authImage from '../Assets/auth-image.png'
 import Google from "../Assets/google.png"
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginPage({googleClick}) {
     const navigate=useNavigate()
@@ -35,8 +37,9 @@ function LoginPage({googleClick}) {
             });
             if (response.ok) {
                 // Redirect to dashboard after successful login
+                await toast.success("Login Success");
                 const data = await response.json(); // Parse response body as JSON
-                console.log(data)
+                // console.log(data)
                 // const { message, user } = response.data;
                 localStorage.setItem('user', JSON.stringify(data.user));
                 if (data.token) {
@@ -48,9 +51,11 @@ function LoginPage({googleClick}) {
             } else {
                 // Handle error
                 console.error('Login failed');
+                toast.error("Login Failure");
             }
         } catch (error) {
             console.error('Error:', error);
+            toast.warning("An Error Occoured");
         }
     };
 
@@ -72,6 +77,7 @@ function LoginPage({googleClick}) {
                 </div> */}
             </div>
             <button className='m-auto flex mt-8 w-3/4 place-content-center p-3 bg-[#674CC4] rounded-[30px] font-bold text-[16px] md:text-[21px] hover:opacity-80' onClick={handleSubmit} >Login</button>
+            <ToastContainer position="top-center" />
             <div className='flex mt-8 w-4/5 m-auto'>
             <p className='w-1/2 m-auto' ><p className='border-[2px] border-[#7F75A2] w-full'></p></p>
             <p className='text-[14px] font-medium pr-2 pl-2'>OR</p>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import authImage from '../Assets/auth-image.png'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Signup() {
     const navigate = useNavigate()
@@ -21,7 +24,8 @@ function Signup() {
     // Check if password matches confirm password
     const confirmPasswordInput = document.querySelector('input[name="confirmpassword"]');
     if (formData.password !== confirmPasswordInput.value) {
-        alert('Passwords do not match');
+
+        toast.warning("Passwords do not match ");
         // You might want to display an error message to the user here
         return; // Exit the function early
     }
@@ -36,6 +40,7 @@ function Signup() {
             body: JSON.stringify(formData)
         });
         if (response.ok) {
+            await toast.success("SignUp Success");
             // Redirect to login page after successful signup
             const data = await response.json();
             localStorage.setItem('user', JSON.stringify(data.user));
@@ -43,10 +48,12 @@ function Signup() {
             window.location.href = '/login';
         } else {
             // Handle error
+            toast.error("Signup Failure");
             console.error('Signup failed');
             console.log(response)
         }
     } catch (error) {
+        toast.warning("An Error Occoured");
         console.error('Error:', error);
     }
 };
@@ -71,6 +78,7 @@ function Signup() {
                     <p className='border-[2px] border-[#7F75A2] w-full'></p>
                 </div>
                 <button className='m-auto flex mt-10 w-3/4 place-content-center p-3 bg-[#674CC4] rounded-[30px] font-bold text-[16px] md:text-[21px] hover:opacity-80' onClick={handleSubmit}>Sign Up</button>
+                <ToastContainer position="top-center" />
                 <div className='w-4/5 m-auto mt-10 text-[16px] font-medium flex place-content-between '>
                     <div> Already have an account??</div>
                     <button className='text-[#1A8FE3]' onClick={() => { navigate('/login') }}>Login</button>
