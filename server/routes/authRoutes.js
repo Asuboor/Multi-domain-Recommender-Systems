@@ -29,7 +29,7 @@ router.get(
 //         maxAge: 3600000, // 1 hour in milliseconds
 //       });
 //     }
-
+// 
 //     res.status(201).json({ message: "User registered successfully", token: req.user.token });
 
 //     // Redirect to dashboard or any other route
