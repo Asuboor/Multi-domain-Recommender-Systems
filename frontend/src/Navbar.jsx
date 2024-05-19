@@ -27,7 +27,7 @@ function Navbar(props) {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      axios.get('http://35.153.137.189:6005/auth/user')
+      axios.get('http://recom-ai.site:6005/auth/user')
         .then(res => {
           setUser(res.data);
           localStorage.setItem('user', JSON.stringify(res.data));

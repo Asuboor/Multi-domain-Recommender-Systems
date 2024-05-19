@@ -123,7 +123,7 @@ router.get(
           });
 
           // Send JSON response with user details
-          res.redirect("http://35.153.137.189/recommenders")
+          res.redirect("http://recom-ai.site/recommenders")
           // res.status(200).json({ message: "User authenticated"});
       } else {
           res.status(401).json({ message: "User not authenticated" });

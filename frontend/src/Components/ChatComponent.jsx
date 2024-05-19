@@ -61,7 +61,7 @@ function ChatComponent() {
 
     const makeRequestAPI = async (prompt) => {
         try {
-            const res = await axios.post("http://35.153.137.189:6005/generate", { prompt });
+            const res = await axios.post("http://recom-ai.site:6005/generate", { prompt });
             return res.data;
         } catch (error) {
             throw error;
