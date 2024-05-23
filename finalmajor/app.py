@@ -319,7 +319,7 @@ def chat():
     flask_response = make_response(jsonify({'response': Markup(formatted_response)}))
     
     # Set CORS headers on the response object
-    flask_response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    flask_response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
     flask_response.headers['Access-Control-Allow-Methods'] = 'POST, GET'
     flask_response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     
