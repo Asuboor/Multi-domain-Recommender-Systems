@@ -19,7 +19,7 @@ const app = express();
 // }));
 
 const corsOptions = {
-  origin: 'http://recom-ai.site:3000',
+  origin: 'http://recom-ai.site',
   methods: "GET,POST,PUT,DELETE", // This should match the URL of your frontend
   credentials: true, // This allows the server to accept credentials (cookies, authorization headers, etc.) from the frontend
 };
