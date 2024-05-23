@@ -154,7 +154,7 @@ def movies():
         for recommendation in recommendations:
             recommendation['Id'] = int(recommendation['Id'])
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST, GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
