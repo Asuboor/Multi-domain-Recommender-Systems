@@ -20,6 +20,15 @@ import Books from "./Assets/info-books.jpg"
 import Restaurant from "./Assets/info-restaurant.jpg"
 import Courses from "./Assets/info-courses.jpg"
 import Binge from "./Assets/info-binge.jpg"
+import movies from "./json/movies.json"
+import books from "./json/books.json"
+import restaurants from "./json/restaurants.json"
+import webseries from "./json/webseries.json"
+import udemy from "./json/udemy.json"
+import coursera from "./json/coursera.json"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function RecommendationPage() {
   const { id } = useParams();
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -46,7 +55,9 @@ function RecommendationPage() {
   const [selectedOption, setSelectedOption] = useState('');
   const [city, setCity] = useState('');
   const [error, setError] = useState(null);
-  const [image,setImage]=useState('')
+  const [image, setImage] = useState('')
+  const [jsonData, setJsonData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -75,15 +86,17 @@ function RecommendationPage() {
               .catch(error => setError(error));
           },
           (error) => {
+            toast.error("No Location Detected");
             setError(error.message);
           }
         );
       } else {
-        setError('Geolocation is not supported by this browser.');
+        toast.warning('Geolocation is not supported by this browser.');
       }
+
     }
   }, []);
-
+  console.log(city)
 
   useEffect(() => {
     // Set background image based on id
@@ -92,6 +105,7 @@ function RecommendationPage() {
       setData({ category: "Movie", duration: "min" })
       setUrl("moviesm")
       setImage(Movie)
+      setJsonData(movies)
       setText("Discover cinematic gems handpicked just for you by our intuitive recommender system.")
 
     }
@@ -101,6 +115,7 @@ function RecommendationPage() {
       setData({ category: "Books", duration: "" })
       setUrl("booksm")
       setImage(Books)
+      setJsonData(books)
       setText("Dive into captivating reads perfectly matched to your preferences by our personalized recommendation engine.")
     }
     else if (id === "courses") {
@@ -108,6 +123,13 @@ function RecommendationPage() {
       // setData({ category: "Book", duration: "" })
       // setUrl("udemy")
       setImage(Courses)
+      if (selectedOption === "coursera") {
+
+        setJsonData(coursera)
+      }
+      else {
+        setJsonData(udemy)
+      }
       setText("Empower your learning journey with courses curated just for you by our intelligent recommender system.")
     }
     else if (id === "restaurants") {
@@ -115,6 +137,7 @@ function RecommendationPage() {
       // setData({ category: "Book", duration: "" })
       setUrl("restaurants")
       setImage(Restaurant)
+      setJsonData(restaurants)
       setText("Explore culinary delights recommended exclusively for you by our expert system.")
     }
     else if (id === "web-series") {
@@ -122,6 +145,7 @@ function RecommendationPage() {
       setData({ category: "Web-Series", duration: "/episode" })
       setUrl("webseries")
       setImage(Binge)
+      setJsonData(webseries)
       setText("Uncover binge-worthy series tailored to your taste, thanks to our smart recommendations.")
     }
     else {
@@ -131,10 +155,55 @@ function RecommendationPage() {
   }, [id]);
 
   function handleChange(event) {
-    const { value } = event.target;
-    setInput(value)
-  }
+    // const { value } = event.target;
+    // setInput(value)
+    const term = event.target.value.toLowerCase(); // Remove trim() to allow spaces
+    setInput(term);
+    if (term === '') {
+      setFilteredData([]);
+    } else {
+      const filtered = jsonData.filter(row => {
+        if (!row) return false; // Check if row is undefined
 
+        if (id === 'movies') {
+
+          const title = typeof row['original_title'] === 'string' ? row['original_title'].toLowerCase() : '';
+          return title.includes(term);
+        }
+        else if (id === "books") {
+          const title = typeof row['bookTitle'] === 'string' ? row['bookTitle'].toLowerCase() : '';
+          return title.includes(term);
+        }
+        else if (id === "restaurants") {
+
+          const title = typeof row['Restaurant'] === 'string' ? row['Restaurant'].toLowerCase() : '';
+          return title.includes(term);
+        }
+        else if (id === "web-series") {
+          const title = typeof row['Series Title'] === 'string' ? row['Series Title'].toLowerCase() : '';
+          return title.includes(term);
+        }
+        else if (id === "courses") {
+          if (selectedOption === "udemy") {
+            setJsonData(udemy)
+            const title = typeof row['title'] === 'string' ? row['title'].toLowerCase() : '';
+            return title.includes(term);
+          }
+          else {
+            setJsonData(coursera)
+            const title = typeof row['course'] === 'string' ? row['course'].toLowerCase() : '';
+            return title.includes(term);
+          }
+
+
+        }
+
+      });
+      setFilteredData(filtered.slice(0, 5));
+    }
+  }
+  console.log(input)
+  console.log(filteredData)
   function handleSearch() {
     console.log(input)
   }
@@ -151,12 +220,15 @@ function RecommendationPage() {
     setLoading(true)
 
 
+
     if (id === "movies") {
       try {
         const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           movie_name: input,
         });
-
+        if(response.data.recommendations.length === 0){
+          toast.error("No Recommendations Found")
+        }
         setRecommendations(response.data.recommendations);
         // const imageId = response.data.recommendations[0].Id
         // console.log(imageId)
@@ -182,7 +254,9 @@ function RecommendationPage() {
           const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
             title_utf: input,
           });
-
+          if(response.data.recommendations.length === 0){
+            toast.error("No Recommendations Found")
+          }
           setRecommendations(response.data.recommendations);
           console.log(response.data)
         } catch (error) {
@@ -194,7 +268,9 @@ function RecommendationPage() {
           const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
             course_name: input,
           });
-
+          if(response.data.recommendations.length === 0){
+            toast.error("No Recommendations Found")
+          }
           setRecommendations(response.data.recommendations);
           console.log(response.data)
         } catch (error) {
@@ -209,7 +285,9 @@ function RecommendationPage() {
         const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           series_name: input,
         });
-
+        if(response.data.recommendations.length === 0){
+          toast.error("No Recommendations Found")
+        }
         setRecommendations(response.data.recommendations);
         console.log(response.data)
       } catch (error) {
@@ -218,16 +296,23 @@ function RecommendationPage() {
       setLoading(false)
     }
     else if (id === "restaurants") {
-      try {
-        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
-          city_name: city,
-          restaurant_name: input
-        });
-
-        setRecommendations(response.data.recommendations);
-        console.log(response.data)
-      } catch (error) {
-        console.error('Error:', error);
+      if (city === "") {
+        toast.error("Please Enable Location");
+      } else {
+        toast.success("Location Detected : " + city)
+        try {
+          const response = await axios.post(`http://localhost:5000/${url}`, {
+            city_name: city,
+            restaurant_name: input
+          });
+          if(response.data.recommendations.length === 0){
+            toast.error("No Recommendations Found")
+          }
+          setRecommendations(response.data.recommendations);
+          console.log(response.data)
+        } catch (error) {
+          console.error('Error:', error);
+        }
       }
       setLoading(false)
     }
@@ -236,7 +321,9 @@ function RecommendationPage() {
         const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           book_name: input,
         });
-
+        if(response.data.recommendations.length === 0){
+          toast.error("No Recommendations Found")
+        }
         setRecommendations(response.data.recommendations);
         console.log(response.data)
       } catch (error) {
@@ -244,6 +331,7 @@ function RecommendationPage() {
       }
       setLoading(false)
     }
+
 
   };
   console.log(data.image)
@@ -253,8 +341,9 @@ function RecommendationPage() {
       className='flex h-screen '
     // Apply dynamic background image
     >
+      <ToastContainer position="top-center" />
       <div className='hidden  xl:block xl:w-1/4 m-4'>
-        <div className='text-white text-[40px] font-extrabold uppercase text-center p-4'>{id}</div>
+        <div className='text-white text-[40px] font-extrabold uppercase text-center p-4 text-'>{id}</div>
         <div className='bg-[#F8F8FF] p-16 rounded-3xl pr-8 pl-8 text-[18px] font-semibold' >
           <img src={image} alt="" className='mb-4' />
           {text}
@@ -310,8 +399,14 @@ function RecommendationPage() {
               placeholder='Search'
               value={input}
               onChange={handleChange}
+              list="results"
               className='w-full h-full outline-none bg-[#F8F8FF] border-none rounded-3xl  font-normal text-[15px] md:text-[20px] p-4 border-2 '
             />
+            <datalist id="results">
+              {filteredData.map((row, index) => (
+                <option key={index} value={row['original_title'] || row['bookTitle'] || row['Restaurant'] || row['Series Title'] || row['title'] || row['course']} />
+              ))}
+            </datalist>
 
             <button className='m-auto' type='submit'>
               <img src={SearchImage} alt="" className='w-[36px] h-[36px] m-auto' />
@@ -345,6 +440,9 @@ function RecommendationPage() {
           {/* {!modal ? <ViewComponent titleClick={onModalClick} info={data} recommendations={recommendations} /> : <MovieComponent backClick={onModalBackClick} info={data} recommendations={recommendations[index]} />} */}
         {/* </div>  */}
         <div className='scroller flex flex-wrap overflow-y-auto h-5/6 ml-2 mr-2 lg:ml-11 lg:mr-11 mt-4 place-content-evenly'>
+        
+
+
           {!loading ?
             (() => {
               switch (id) {

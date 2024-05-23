@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import Send from "../Assets/send.png";
 import axios from 'axios';
@@ -12,15 +8,16 @@ function ChatComponent() {
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [userImage, setUserImage] = useState("https://img.icons8.com/ios-filled/50/000000/user.png");
+    const [botImage, setBotImage] = useState("https://img.icons8.com/?size=100&id=EI4WWg4sHDVP&format=png&color=000000");
 
     useEffect(() => {
         // Delayed appearance of initial bot message
         const timer = setTimeout(() => {
-            // setIsLoading(true)
             setChatEntries([{ type: 'bot', text: "Hey, I'm your recommender bot" }]);
-        }, 500); // 2000 milliseconds = 2 seconds
+        }, 500);
 
-        return () => clearTimeout(timer); // Clean up timer on component unmount
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
@@ -39,16 +36,15 @@ function ChatComponent() {
         const trimmedMessage = inputValue.trim();
         if (trimmedMessage !== '') {
             const userMessage = { type: 'user', text: trimmedMessage };
-            setChatEntries(prevEntries => [...prevEntries, userMessage]); // Add user message to chat entries
+            setChatEntries(prevEntries => [...prevEntries, userMessage]);
             setInputValue('');
             setIsLoading(true);
             setError(null);
             try {
                 const data = await makeRequestAPI(trimmedMessage);
-                // Simulate delay before receiving bot response
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 const botMessage = { type: 'bot', text: data };
-                setChatEntries(prevEntries => [...prevEntries, botMessage]); // Add bot response to chat entries
+                setChatEntries(prevEntries => [...prevEntries, botMessage]);
             } catch (err) {
                 setError(err.message || "An error occurred");
                 console.error("Failed to fetch response:", err);
@@ -61,21 +57,58 @@ function ChatComponent() {
 
     const makeRequestAPI = async (prompt) => {
         try {
-            const res = await axios.post("http://recom-ai.site:6005/generate", { prompt });
-            return res.data;
+            const res = await axios.post("http://localhost:5000/chat", { user_input: prompt });
+            return res.data.response
         } catch (error) {
             throw error;
         }
     };
 
+    // Function to format text and add bold formatting
+    const formatText = (text) => {
+        // Replace <b> tags with bold formatting
+        const formattedText = text.replace(/<b>(.*?)<\/b>/g, "<b>$1</b>");
+        return <div dangerouslySetInnerHTML={{ __html: formattedText }} />;
+    };
+
     return (
         <div className='bg-[#F8F8FF] rounded-[40px] border-[4px] border-[#2C0AA0] pr-2 m-auto w-full md:w-2/5 h-[590px] mt-4 flex flex-col'>
             <div id="chat-container" className='scroller h-5/6 p-2 md:p-8 flex flex-col overflow-y-auto'>
+                {/* {chatEntries.map((entry, index) => (
+                    <div key={index} className={`flex ${entry.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        {entry.type === 'user' && (
+                            <div className='w-1/6'>
+                                <img src={userImage} alt="user img" />
+                            </div>
+                        )}
+                        <div className={`bg-[#595FF0] text-[12px] md:text-[18px] font-medium text-white min-w-10 md:min-w-20 max-w-72 p-3 md:p-4 m-1 ${entry.type === 'user' ? 'self-end rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px]' : 'self-start rounded-t-[25px] rounded-tr-[15px] rounded-br-[20px] rounded-bl-[0px]'}`}>
+                            {formatText(entry.text)}
+                        </div>
+                        {entry.type === 'bot' && (
+                            <div className='w-1/6'>
+                                <img src={botImage} alt="bot img" />
+                            </div>
+                        )}
+                    </div>
+                ))} */}
                 {chatEntries.map((entry, index) => (
-                    <div key={index} className={`bg-[#595FF0]  text-[12px] md:text-[18px] font-medium text-white min-w-10 md:min-w-20 max-w-72 p-3 md:p-4 m-1 ${entry.type === 'user' ? 'self-end rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px]' : 'self-start rounded-t-[25px] rounded-tr-[15px] rounded-br-[20px] rounded-bl-[0px]'}`}>
-                        {entry.text}
+                    <div key={index} className={`flex ${entry.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                        {entry.type === 'bot' && (
+                            <div className='w-1/12'>
+                                <img src={botImage} alt="bot img" />
+                            </div>
+                        )}
+                        <div className={`bg-[#595FF0] text-[12px] md:text-[18px] font-medium text-white min-w-10 md:min-w-20 max-w-72 p-3 md:p-4 m-1 ${entry.type === 'user' ? 'self-end rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px]' : 'self-start rounded-t-[25px] rounded-tr-[15px] rounded-br-[20px] rounded-bl-[0px]'}`}>
+                            {formatText(entry.text)}
+                        </div>
+                        {entry.type === 'user' && (
+                            <div className='w-1/12'>
+                                <img src={userImage} alt="user img" />
+                            </div>
+                        )}
                     </div>
                 ))}
+
                 {isLoading && <div className="bg-[#595FF0] rounded-t-[15px] rounded-tr-[25px] rounded-br-[0px] rounded-bl-[20px] text-[12px] md:text-[18px] font-medium text-white min-w-20 max-w-72 p-4 m-1 self-start">
                     <ThreeDots
                         visible={true}
