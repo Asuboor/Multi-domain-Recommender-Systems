@@ -301,7 +301,7 @@ function RecommendationPage() {
       } else {
         toast.success("Location Detected : " + city)
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
             city_name: city,
             restaurant_name: input
           });
