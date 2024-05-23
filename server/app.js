@@ -19,7 +19,7 @@ const app = express();
 // }));
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://recom-ai.site:3000',
   methods: "GET,POST,PUT,DELETE", // This should match the URL of your frontend
   credentials: true, // This allows the server to accept credentials (cookies, authorization headers, etc.) from the frontend
 };
@@ -54,7 +54,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/",(req,res)=>{
-  res.send("Hello from nodejs server")
+  res.send("Hello user I am a nodejs server !!!")
 })
 // --testing--
 // const genAI = new GoogleGenerativeAI(process.env.API_KEY);

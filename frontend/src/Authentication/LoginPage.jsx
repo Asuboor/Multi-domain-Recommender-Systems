@@ -18,7 +18,7 @@ function LoginPage({googleClick}) {
     };
     const handleGoogleLogin = () => {
         // Redirect to backend route for Google OAuth
-        window.open("http://localhost:6005/auth/google/callback","_self")
+        window.open("http://recom-ai.site:6005/auth/google/callback","_self")
         // localStorage
         googleClick()
         
@@ -28,7 +28,7 @@ function LoginPage({googleClick}) {
         e.preventDefault();
         // Send form data to backend for login
         try {
-            const response = await fetch('http://localhost:6005/auth/login', {
+            const response = await fetch('http://recom-ai.site:6005/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

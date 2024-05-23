@@ -223,7 +223,7 @@ function RecommendationPage() {
 
     if (id === "movies") {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           movie_name: input,
         });
         if(response.data.recommendations.length === 0){
@@ -251,7 +251,7 @@ function RecommendationPage() {
     else if (id === "courses") {
       if (selectedOption === "udemy") {
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
             title_utf: input,
           });
           if(response.data.recommendations.length === 0){
@@ -265,7 +265,7 @@ function RecommendationPage() {
       }
       else {
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
             course_name: input,
           });
           if(response.data.recommendations.length === 0){
@@ -282,7 +282,7 @@ function RecommendationPage() {
     }
     else if (id === "web-series") {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           series_name: input,
         });
         if(response.data.recommendations.length === 0){
@@ -318,7 +318,7 @@ function RecommendationPage() {
     }
     else {
       try {
-        const response = await axios.post(`http://localhost:5000/${url}`, {
+        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
           book_name: input,
         });
         if(response.data.recommendations.length === 0){

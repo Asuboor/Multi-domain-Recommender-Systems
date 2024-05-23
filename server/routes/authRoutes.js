@@ -29,7 +29,7 @@ router.get(
 //         maxAge: 3600000, // 1 hour in milliseconds
 //       });
 //     }
-
+// 
 //     res.status(201).json({ message: "User registered successfully", token: req.user.token });
 
 //     // Redirect to dashboard or any other route
@@ -123,7 +123,7 @@ router.get(
           });
 
           // Send JSON response with user details
-          res.redirect("http://localhost:3000/recommenders")
+          res.redirect("http://recom-ai.site/recommenders")
           // res.status(200).json({ message: "User authenticated"});
       } else {
           res.status(401).json({ message: "User not authenticated" });
