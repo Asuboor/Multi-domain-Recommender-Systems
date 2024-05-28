@@ -57,7 +57,7 @@ function ChatComponent() {
 
     const makeRequestAPI = async (prompt) => {
         try {
-            const res = await axios.post("http://localhost:5000/chat", { user_input: prompt });
+            const res = await axios.post("https://recomm-ai-model.onrender.com/chat", { user_input: prompt });
             return res.data.response
         } catch (error) {
             throw error;
