@@ -54,7 +54,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/",(req,res)=>{
-  res.send("Hello user I am a nodejs server !!!")
+  res.send("Hello user I am a nodejs server on vercel app !!!")
 })
 // --testing--
 // const genAI = new GoogleGenerativeAI(process.env.API_KEY);
