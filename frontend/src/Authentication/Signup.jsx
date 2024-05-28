@@ -32,7 +32,7 @@ function Signup() {
 
     // Send form data to backend for signup
     try {
-        const response = await fetch('http://recom-ai.site:6005/auth/signup', {
+        const response = await fetch('https://recomm-ai-backend.vercel.app/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
