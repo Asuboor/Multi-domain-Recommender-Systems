@@ -1,4 +1,6 @@
-﻿Flask==3.0.0
+setuptools>=42
+wheel
+Flask==3.0.0
 flask-cors==4.0.0
 scikit-learn==1.2.2
 pandas==1.5.0
@@ -7,4 +9,3 @@ matplotlib==3.7.1
 Flask-Session==0.8.0
 MarkupSafe==2.1.1
 google-generativeai==0.5.4
-Gunicorn
