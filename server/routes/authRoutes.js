@@ -123,7 +123,7 @@ router.get(
           });
 
           // Send JSON response with user details
-          res.redirect("http://recom-ai.site/recommenders")
+          res.redirect("https://recomm-ai.vercel.app/recommenders")
           // res.status(200).json({ message: "User authenticated"});
       } else {
           res.status(401).json({ message: "User not authenticated" });
