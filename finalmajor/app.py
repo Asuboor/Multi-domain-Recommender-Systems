@@ -154,7 +154,7 @@ def movies():
         for recommendation in recommendations:
             recommendation['Id'] = int(recommendation['Id'])
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'https://recomm-ai.vercel.app'
         response.headers['Access-Control-Allow-Methods'] = 'POST, GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
@@ -198,7 +198,7 @@ def coursera():
         course_name_recommender = CourseRecommender()
         recommendations = course_name_recommender.recommend_ctf(course_name)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'https://recomm-ai.vercel.app
+        response.headers['Access-Control-Allow-Origin'] = 'https://recomm-ai.vercel.app'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
