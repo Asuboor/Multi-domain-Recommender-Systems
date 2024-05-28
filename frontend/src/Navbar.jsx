@@ -27,7 +27,7 @@ function Navbar(props) {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
-      axios.get('http://recom-ai.site:6005/auth/user')
+      axios.get('https://recomm-ai-backend.vercel.app/auth/user')
         .then(res => {
           setUser(res.data);
           localStorage.setItem('user', JSON.stringify(res.data));
