@@ -223,7 +223,7 @@ function RecommendationPage() {
 
     if (id === "movies") {
       try {
-        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
+        const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
           movie_name: input,
         });
         if(response.data.recommendations.length === 0){
@@ -251,7 +251,7 @@ function RecommendationPage() {
     else if (id === "courses") {
       if (selectedOption === "udemy") {
         try {
-          const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
+          const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
             title_utf: input,
           });
           if(response.data.recommendations.length === 0){
@@ -265,7 +265,7 @@ function RecommendationPage() {
       }
       else {
         try {
-          const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
+          const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
             course_name: input,
           });
           if(response.data.recommendations.length === 0){
@@ -282,7 +282,7 @@ function RecommendationPage() {
     }
     else if (id === "web-series") {
       try {
-        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
+        const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
           series_name: input,
         });
         if(response.data.recommendations.length === 0){
@@ -301,7 +301,7 @@ function RecommendationPage() {
       } else {
         toast.success("Location Detected : " + city)
         try {
-          const response = await axios.post(`http://localhost:5000/${url}`, {
+          const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
             city_name: city,
             restaurant_name: input
           });
@@ -318,7 +318,7 @@ function RecommendationPage() {
     }
     else {
       try {
-        const response = await axios.post(`http://recom-ai.site:5000/${url}`, {
+        const response = await axios.post(`https://recomm-ai-model.onrender.com/${url}`, {
           book_name: input,
         });
         if(response.data.recommendations.length === 0){
