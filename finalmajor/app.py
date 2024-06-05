@@ -43,7 +43,7 @@ Session(app)
 
 
 
-genai.configure(api_key="AIzaSyCZQHx_6V4tNhtzDCKEdj6_4WZQchfrwA0")
+genai.configure(api_key="")
 
 generation_config = {
     "temperature": 1,
