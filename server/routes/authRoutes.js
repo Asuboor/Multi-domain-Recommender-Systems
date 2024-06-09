@@ -123,7 +123,7 @@ router.get(
           });
 
           // Send JSON response with user details
-          res.redirect("http://recom-ai.site/recommenders")
+          res.redirect("http://localhost:3000/recommenders")
           // res.status(200).json({ message: "User authenticated"});
       } else {
           res.status(401).json({ message: "User not authenticated" });
@@ -141,7 +141,7 @@ router.get('/user', (req, res) => {
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
-
+router.post('/logout', authController.logout);
 module.exports = router;
 
 // const express = require('express');
