@@ -43,7 +43,7 @@ Session(app)
 
 
 
-genai.configure(api_key="")
+genai.configure(api_key="AIzaSyCZQHx_6V4tNhtzDCKEdj6_4WZQchfrwA0")
 
 generation_config = {
     "temperature": 1,
@@ -117,7 +117,7 @@ def books():
         book_recommender = BookRecommender()
         recommendations = book_recommender.recommend_books(book_name)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
@@ -167,7 +167,7 @@ def webseries():
         webseries_recommender = WebSeriesRecommender()
         recommendations = webseries_recommender.recommend_web_series(series_name)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
@@ -183,7 +183,7 @@ def udemy():
         title_utf_recommender = UdemyRecommender()
         recommendations = title_utf_recommender.recommend_utf(title_utf)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
@@ -198,7 +198,7 @@ def coursera():
         course_name_recommender = CourseRecommender()
         recommendations = course_name_recommender.recommend_ctf(course_name)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
@@ -214,7 +214,7 @@ def recommend_restaurants():
         restaurant_recommender = RestaurantRecommender()
         recommendations = restaurant_recommender.recommend_bow_city(restaurant_name, city_name)
         response = make_response({"recommendations": recommendations})
-        response.headers['Access-Control-Allow-Origin'] = 'http://recom-ai.site:3000'
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
         response.headers['Access-Control-Allow-Methods'] = 'POST','GET'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
