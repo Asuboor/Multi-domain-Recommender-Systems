@@ -54,7 +54,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/",(req,res)=>{
-  res.send("Hello There !!!")
+  res.send("Hello Team !!!")
 })
 // --testing--
 // const genAI = new GoogleGenerativeAI(process.env.API_KEY);
